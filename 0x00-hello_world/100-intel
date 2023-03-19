@@ -1,2 +1,13 @@
 #!/bin/bash
-gcc -S -masm=intel $CFILE -o output_file.s
+
+# Get the name of the C file from the command line argument
+CFILE=$1
+
+# Generate the name of the output file by replacing the extension of the C file with .s
+OUTFILE="${CFILE%.c}.s"
+
+# Generate the assembly code using GCC compiler
+gcc -S -masm=intel "$CFILE" -o "$OUTFILE"
+
+# Print a success message
+echo "Generated assembly code saved in $OUTFILE"
