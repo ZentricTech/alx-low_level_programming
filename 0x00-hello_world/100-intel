@@ -1,2 +1,2 @@
 #!/bin/bash
-gcc -S -masm=intel your_c_code.c -o output_file.s
+gcc -S -masm=intel $CFILE -o output_file.s
