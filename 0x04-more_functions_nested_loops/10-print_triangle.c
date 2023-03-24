@@ -1,17 +1,30 @@
-#include <main.h>
+#include "main.h"
 /**
- * main - Entry point
- * Return: Always 0
+ * print_triangle - prints a triangle, followed by a new line
+ * @size: size of the triangle
  */
-int main(void)
+void print_triangle(int size)
 {
-	unsigned long int i = 3, n = 612852475143;
+ if (size <= 0)
+ {
+ _putchar('\n');
+ } else
+ {
+ int i, j;
 
-	for (; i < 12057; i += 2)
-	{
-		while (n % i == 0 && n != i)
-			n /= i;
-	}
-	printf("%lu\n", n);
-	return (0);
+ for (i = 1; i <= size; i++)
+ {
+ for (j = i; j < size; j++)
+ {
+ _putchar(' ');
+ }
+
+ for (j = 1; j <= i; j++)
+ {
+ _putchar('#');
+ }
+
+ _putchar('\n');
+ }
+ }
 }
