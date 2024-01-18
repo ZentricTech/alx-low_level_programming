@@ -1,18 +1,14 @@
 #include "main.h"
 /**
- * _isalpha - checks if input is lowercase
- * @c: variable to determine if input is lowercase
- * main - uses built in function
- * Return: 0 if succesful
+ * _isalpha - returns 1 if c is a letter
+ * @c: integer to be tested
+ * Return: 1 or 0
  */
-
 int _isalpha(int c)
 {
-int i;
-i = 0;
-if (c >= 'a' && c <= 'z')
-i = 0;
-else if (c >= 'A' && c <= 'Z')
-i = 1;
-return (i);
+	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122))
+	{
+		return (1);
+	}
+	return (0);
 }
