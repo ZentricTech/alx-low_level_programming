@@ -1,12 +1,7 @@
-/*
- * File: 105-jump_list.c
- * Auth: George Kabucho
- */
-
 #include "search_algos.h"
 
 /**
- * jump_list - Searches for an algorithm in a sorted singly
+ * jump_list - Searching for an algorithm in a sorted singly
  *             linked list of integers using jump search.
  * @list: A pointer to the  head of the linked list to search.
  * @size: The number of nodes in the list.
