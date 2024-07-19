@@ -1,39 +1,56 @@
 #include "search_algos.h"
 
+
 /**
-  * linear_skip - find value in skip list
-  * @list: skip list
-  * @value: value to search for
-  *
-  * Return: return node where value resides or NULL if not found
-  */
+ * linear_skip - searches for a value conatined in a skip list; assumes a
+ * list with sorted values and a single skip layer with nodes at every index
+ * which is a multiple of the square root of the size of the list
+ *
+ * @list: pointer to the head of the skip list to traverse
+ * @value: value to search for
+ * Return: pointer on the first node where value is located, or NULL if list
+ * is NULL or value not found
+ */
 skiplist_t *linear_skip(skiplist_t *list, int value)
 {
-	unsigned int l, r;
-	skiplist_t *start, *end = list;
+	skiplist_t *temp = NULL, *stop = NULL;
 
 	if (!list)
 		return (NULL);
-	while (end->next && end->n < value)
+
+	temp = list;
+	while (temp && temp->express && temp->express->n < value)
 	{
-		start = end;
-		if (end->express)
-		{
-			end = end->express;
-			printf("Value checked at index [%d] = [%d]\n", (int)end->index, end->n);
-		}
-		else
-			while (end->next)
-				end = end->next;
+		printf("Value checked at index [%lu] = [%i]\n",
+		       temp->express->index, temp->express->n);
+		temp = temp->express;
 	}
-	l = (int)start->index;
-	r = (int)end->index;
-	printf("Value found between indexes [%d] and [%d]\n", l, r);
-	for (; start && l <= r; l++, start = start->next)
+	stop = temp;
+	while (stop && stop->next != stop->express)
+		stop = stop->next;
+	/* value potentially lies between two express nodes */
+	if (temp->express)
 	{
-		printf("Value checked at index [%d] = [%d]\n", l, start->n);
-		if (start->n == value)
-			return (start);
+		printf("Value checked at index [%lu] = [%i]\n",
+		       temp->express->index, temp->express->n);
+		printf("Value found between indexes [%lu] and [%lu]\n",
+		       temp->index, temp->express->index);
 	}
-	return (NULL);
+	/* value is greater than last express node, potentially out of list */
+	else
+		printf("Value found between indexes [%lu] and [%lu]\n",
+		       temp->index, stop->index);
+
+	while (temp != stop && temp->n < value)
+	{
+		printf("Value checked at index [%lu] = [%i]\n",
+		       temp->index, temp->n);
+		temp = temp->next;
+	}
+	printf("Value checked at index [%lu] = [%i]\n",
+	       temp->index, temp->n);
+
+	if (temp == stop)
+		return (NULL);
+	return (temp);
 }
